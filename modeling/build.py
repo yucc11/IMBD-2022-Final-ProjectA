@@ -1,18 +1,17 @@
 """
 Estimator building logic.
-Author: JiaWei Jiang
 
 This file contains the basic logic of building estimators to train and
 evaluate in different cv folds.
 """
 from typing import Any, Dict, List
 
-from catboost import CatBoostRegressor
-from lightgbm import LGBMRegressor
+# from catboost import CatBoostRegressor
+from lightgbm import LGBMRegressor, LGBMClassifier
 from sklearn.base import BaseEstimator
 from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
-from xgboost import XGBRegressor
+# from xgboost import XGBRegressor
 
 
 def build_models(
@@ -30,10 +29,12 @@ def build_models(
     """
     if model_name == "lgbm":
         model = LGBMRegressor
-    elif model_name == "xgb":
-        model = XGBRegressor
-    elif model_name == "cat":
-        model = CatBoostRegressor
+    elif model_name == "lgbmclf":
+        model = LGBMClassifier
+    # elif model_name == "xgb":
+    #     model = XGBRegressor
+    # elif model_name == "cat":
+    #     model = CatBoostRegressor
     elif model_name == "rf":
         model = RandomForestRegressor
     elif model_name == "et":
