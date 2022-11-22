@@ -3,7 +3,7 @@ Anomaly number of UV oven lamps prediction.
 
 
 ## Train1 Round
-- Setup  </br>
+- Setup </br>
 `mkdir processed`, `mkdir output`
 
 - Copy train1 data from readonly directory `/TOPIC/projectA/` to `./data/raw/train1/` </br>
@@ -28,11 +28,11 @@ Anomaly number of UV oven lamps prediction.
 - Train models using processed train1&train2 data with 10 seeds </br>
 `python -m train_eval --proc-file train_1_2.csv --n-seeds 10`
 
+## Inference
 - Process test data </br>
 `python -m dp --data-type ts --ts-source tr_12`
-
-## Inference
-- `python -m infer --model-dir ./output/fold --save-dir ./output/ --save-fname 111011_projectA_ans.csv`
+- Inference </br>
+`python -m infer --model-dir ./output/fold --save-dir ./output/ --save-fname 111011_projectA_ans.csv`
 
 
 ### Project Structure
