@@ -14,10 +14,10 @@ import argparse
 from argparse import Namespace
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
-from sklearn.model_selection import GroupKFold #, KFold, StratifiedKFold
+from sklearn.model_selection import GroupKFold
 from modeling.build import build_models
-from utils.utils import seed_all
-seed_all(42)
+# from utils.utils import seed_all
+# seed_all(42)
 
 def _predict(model, x: pd.DataFrame) -> np.ndarray:
         """Do inference with the well-trained estimator.
@@ -170,11 +170,11 @@ def main(args: Namespace) -> None:
     feat_cols.remove("oven_layer_id")
     feat_cols.remove("fold")
 
-    # feat_cols.remove("fold_diff_acc_hour")
-    # feat_cols.remove("ol_diff_acc_hour")
+    feat_cols.remove("fold_diff_acc_hour")
+    feat_cols.remove("ol_diff_acc_hour")
 
     # TODO:
-    # feat_cols.remove("fold_end_acc_hr")
+    feat_cols.remove("fold_end_acc_hr")
     # feat_cols.remove("power_s1")
     # feat_cols.remove("power_s2")
 

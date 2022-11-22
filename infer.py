@@ -67,7 +67,7 @@ def _save_prediction(X, y_pred, save_dir, fname) -> None:
     X["y_pred"] = y_pred
     X["id"] = X.apply(lambda x: x.oven_id_str + "-" + str(x.layer_id), axis=1)
     X.sort_values(["oven_id_str", "layer_id"])[["id", "y_pred"]].to_csv(Path(save_dir) / fname, index=False)
-    print(f"File `{save_dir} / {fname}` saved.")
+    print(f"File `{save_dir}{fname}` saved.")
 
 def main(args: Namespace) -> None:
 
@@ -82,8 +82,9 @@ def main(args: Namespace) -> None:
     # oid2idx = idx_oid.set_index(1).to_dict()[0]
     with open("./data/processed/oid2idx.pkl", "rb") as f:
         oid2idx = pickle.load(f)
+    X["oven_id_str"] = X["oven_id"]
     X["oven_id"] = X["oven_id"].map(oid2idx)
-
+    
     y_pred = _run_infer(
                 X[feat_cols],
                 args.model_dir,
@@ -97,9 +98,7 @@ def main(args: Namespace) -> None:
 if __name__ == "__main__":
     # Parse arguments
     parser = argparse.ArgumentParser()
-    # parser.add_argument(
-    #     "--input-fname", default="test.csv", help="infer file name"
-    # )
+
     parser.add_argument(
         "--model-dir", default="./output/fold", help=""
     )
